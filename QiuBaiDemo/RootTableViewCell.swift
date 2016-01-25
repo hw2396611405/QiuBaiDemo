@@ -20,28 +20,28 @@ class RootTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier:reuseIdentifier)
         
         //加载子控件
-        
+        self.loadSubViews()
         
     }
     //加载子控件
-    func leoaSubViews() {
+    func loadSubViews() {
     //初始化用户头像
         let iconFrame = CGRectMake(0, 0, 40, 40);
         self.userIcon = UIImageView(frame: iconFrame)
-        self.userIcon.backgroundColor = UIColor.whiteColor()
+        self.userIcon.backgroundColor = UIColor.redColor()
         self.userIcon.layer.cornerRadius = 20
         self.userIcon.layer.masksToBounds = true
         self.contentView.addSubview(self.userIcon)
         //初始化用户昵称
         let NickFrame = CGRectMake(CGRectGetMaxX(iconFrame), 0,width-CGRectGetMaxX(iconFrame) , 40)
         self.userNickName = UILabel(frame: NickFrame)
-        self.userNickName.backgroundColor = UIColor.whiteColor()
+        self.userNickName.backgroundColor = UIColor.greenColor()
         self.contentView.addSubview(self.userNickName)
         
         //初始化用户发表内容
         let contentFrame = CGRectMake(0, CGRectGetMaxY(iconFrame), UIScreen.mainScreen().bounds.width, 40)
         self.userContent = UILabel(frame: contentFrame)
-        self.userContent.backgroundColor = UIColor.whiteColor()
+        self.userContent.backgroundColor = UIColor.blueColor()
         self.contentView.addSubview(self.userContent)
     }
     

@@ -14,6 +14,7 @@
 		7B96CC7F1C55B2E300AB4A59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B96CC7D1C55B2E300AB4A59 /* LaunchScreen.storyboard */; };
 		7B96CC8B1C55B5B900AB4A59 /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96CC8A1C55B5B900AB4A59 /* RootTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B96CC8D1C55B8B800AB4A59 /* RootTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96CC8C1C55B8B800AB4A59 /* RootTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		7B96CC8F1C55C66D00AB4A59 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96CC8E1C55C66D00AB4A59 /* NetworkHelper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7B96CC801C55B2E300AB4A59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B96CC8A1C55B5B900AB4A59 /* RootTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
 		7B96CC8C1C55B8B800AB4A59 /* RootTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableViewCell.swift; sourceTree = "<group>"; };
+		7B96CC8E1C55C66D00AB4A59 /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				7B96CC761C55B2E300AB4A59 /* ViewController.swift */,
 				7B96CC8A1C55B5B900AB4A59 /* RootTableViewController.swift */,
 				7B96CC8C1C55B8B800AB4A59 /* RootTableViewCell.swift */,
+				7B96CC8E1C55C66D00AB4A59 /* NetworkHelper.swift */,
 				7B96CC781C55B2E300AB4A59 /* Main.storyboard */,
 				7B96CC7B1C55B2E300AB4A59 /* Assets.xcassets */,
 				7B96CC7D1C55B2E300AB4A59 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				7B96CC771C55B2E300AB4A59 /* ViewController.swift in Sources */,
 				7B96CC8D1C55B8B800AB4A59 /* RootTableViewCell.swift in Sources */,
+				7B96CC8F1C55C66D00AB4A59 /* NetworkHelper.swift in Sources */,
 				7B96CC8B1C55B5B900AB4A59 /* RootTableViewController.swift in Sources */,
 				7B96CC751C55B2E300AB4A59 /* AppDelegate.swift in Sources */,
 			);

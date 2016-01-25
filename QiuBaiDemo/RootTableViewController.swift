@@ -13,7 +13,11 @@ class RootTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //注册cell 这个的self相当与class
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.registerClass(RootTableViewCell.self, forCellReuseIdentifier: "Cell")
+        //发起网络请求
+        NetworkHelper.ShardInstance().getDataFromServer("http://m2.qiushibaike.com/article/list/text?count=30&page=1")
+        
+        //self.tableView.rowHeight = 80
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,12 +45,16 @@ class RootTableViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = "治哥"
+        //as 关键字 类型强转
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RootTableViewCell
+       cell.userNickName.text = "治哥"
 
         // Configure the cell...
 
         return cell
+    }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
     }
    
 
