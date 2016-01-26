@@ -8,14 +8,27 @@
 
 import UIKit
 
-class RootTableViewController: UITableViewController {
+
+class RootTableViewController: UITableViewController,NetworkHelperDelegate{
+    //默认请求第一页的数据
+    var page = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //注册cell 这个的self相当与class
         self.tableView.registerClass(RootTableViewCell.self, forCellReuseIdentifier: "Cell")
+        //成为网络请求工具类的代理
+        NetworkHelper.ShardInstance().delegate = self
+        
+        let UrlStr = "http://m2.qiushibaike.com/article/list/text?count=30&page=1"
         //发起网络请求
-        NetworkHelper.ShardInstance().getDataFromServer("http://m2.qiushibaike.com/article/list/text?count=30&page=1")
+        NetworkHelper.ShardInstance().getDataFromServer(UrlStr, isTrue: true)
+        
+        self.tableView.addHeaderWithTarget(self, action:"refreshData")
+        self.tableView.addFooterWithTarget(self, action:"loadMoreData")
+        //添加foot
+        
+        
         
         //self.tableView.rowHeight = 80
 
@@ -25,6 +38,47 @@ class RootTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    //下拉刷新的逻辑处理
+    func refreshData() {
+        //把page置为1,请求最新的数据
+        self.page = 1
+        let urlStr = "http://m2.qiushibaike.com/article/list/text?count=30&page=\(page)"
+        print(urlStr)
+        //发起网络请求
+        NetworkHelper.ShardInstance().getDataFromServer(urlStr, isTrue: true)
+        
+    }
+    //上拉加载的逻辑处理
+    
+    func  loadMoreData()
+    {
+        self.page++
+        let urlStr = "http://m2.qiushibaike.com/article/list/text?count=30&page=\(page)"
+        //发起网络请求
+        NetworkHelper.ShardInstance().getDataFromServer(urlStr, isTrue: false)
+    }
+
+    
+    //MARK : 实现工具类代理方法
+    
+    func passValue() {
+        //根据page来判断当前网络请求成功的数据是下拉加载还是上来加载
+        if page == 1 {
+        //下拉刷新完成,结束动画
+            self.tableView.headerEndRefreshing()
+        }else {
+        //上拉加载完成 结束动画
+            self.tableView.footerEndRefreshing()
+        
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,21 +94,31 @@ class RootTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return NetworkHelper.ShardInstance().dataArray.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         //as 关键字 类型强转
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! RootTableViewCell
-       cell.userNickName.text = "治哥"
+        let model = NetworkHelper.ShardInstance().dataArray[indexPath.row]as!QiuBaiModel;
+        cell.changeSubViewFrame(model)
+        cell.userNickName.text = model.userName
+        cell.userContent.text = model.userContact
+        cell.userIcon.sd_setImageWithURL(NSURL(string: model.Icon))
+        cell.userFunny.text = "200 好笑"
+        cell.userComments.text = "10评论"
 
         // Configure the cell...
 
         return cell
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        
+        let model = NetworkHelper.ShardInstance().dataArray[indexPath.row] as! QiuBaiModel
+      let heigth =  RootTableViewCell.calcuteCellHeight(model)
+        return heigth + 100
     }
    
 
